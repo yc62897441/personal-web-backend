@@ -13,6 +13,17 @@ const liveController = {
         console.log('error', error)
         return res.json({ status: 'error', error: error })
       })
+  },
+  getLive: (req, res) => {
+    const LiveId = req.params.liveId
+    Live.findOne({ where: { id: LiveId }, raw: true, nest: true })
+      .then(live => {
+        return res.json({ status: 'success', data: live })
+      })
+      .catch(error => {
+        console.log('error', error)
+        return res.json({ status: 'error', error: error })
+      })
   }
 }
 
